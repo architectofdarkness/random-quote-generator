@@ -6,7 +6,8 @@ let quotes = [
     },
     {
         quote: "Limit your \"always\" and your \"nevers.\"",
-        source: ""
+        source: "Unknown",
+        citation: "Googlio"
     },
     {
         quote: "Spread love everywhere you go.",
@@ -25,21 +26,32 @@ let quotes = [
     }
 ];
 
-// Create the getRandomQuuote function and name it getRandomQuote
+// Create the getRandomQuote function to get and return a quote.
 
 let getRandomQuote = (no) => {
-    return quotes[no].quote;
+    return quotes[no];
 };
 
 // Create the printQuote funtion and name it printQuote
 
 const printQuote = () => {
     let randomNumber = Math.floor(Math.random()*quotes.length);
-    let quote = document.querySelector('.quote');
+    let quoteDisplay = document.querySelector('#quote-box');
+    let newQuote = getRandomQuote(randomNumber);
     
-    quote.textContent = getRandomQuote(randomNumber);
+    quoteDisplay.innerHTML = "";
+    quoteDisplay.innerHTML = `<p class="quote"> ${newQuote.quote} </p>`;
+    
+    if (newQuote.source) {
+        quoteDisplay.innerHTML += `<p class="source"> ${newQuote.source}`;
+    } if (newQuote.citation) {
+        quoteDisplay.innerHTML += `<span class="citation"> ${newQuote.citation} </span>`;
+    } if (newQuote.year) {
+        quoteDisplay.innerHTML += `<span class="year"> ${newQuote.year} </span>`;
+    }
+    quote.innerHTML += `</p>`;
 }
 
 // This event listener will respond to "Show another quote" button clicks
-// when user clicks anywhere on the button, the "printQuote" function is called
+// When user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
